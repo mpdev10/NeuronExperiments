@@ -53,9 +53,18 @@ def test_or_func(neuron, activation, lr, weight_range, run_num):
     test_activation(train_y, neuron, activation, lr, weight_range, run_num)
 
 
+def test_func(func, neuron, activation, lr, weight_range, run_num):
+    if func == 'and':
+        test_and_func(neuron, activation, lr, weight_range, run_num)
+    else:
+        test_or_func(neuron, activation, lr, weight_range, run_num)
+
+
+
 if __name__ == '__main__':
 
     run_number = 150
+    functions = ['and', 'or']
 
     for neuron in ('perceptron', 'adaline'):
         initial_range = 1.0
@@ -66,26 +75,25 @@ if __name__ == '__main__':
 
         # Weight range experiment
         print("---WEIGHT RANGE EXPERIMENT---")
-        while initial_range >= 0:
-            current_range = [-initial_range, initial_range]
-            print("RANGE:", current_range)
-            print("")
-            test_and_func(neuron, actv, learning_rate, current_range, run_number)
-            print("")
-            test_or_func(neuron, actv, learning_rate, current_range, run_number)
-            initial_range = np.around(initial_range - 0.2, decimals=1)
-            print("")
+        for fun in functions:
+            while initial_range >= 0:
+                current_range = [-initial_range, initial_range]
+                print("RANGE:", current_range)
+                print("")
+                test_func(fun, neuron, actv, learning_rate, current_range, run_number)
+                initial_range = np.around(initial_range - 0.2, decimals=1)
+                print("")
 
         # Learning rate experiment
         print("---LEARNING RATE EXPERIMENT---")
-        for lr in [0.5, 0.25, 0.1, 0.05, 0.01, 0.001]:
-            print("LEARNING RATE:", lr)
-            print("")
-            if lr != 0.5:
-                test_and_func(neuron, actv, learning_rate, range, run_number)
+        for fun in functions:
+            for lr in [0.5, 0.25, 0.1, 0.05, 0.01, 0.001]:
+                print("LEARNING RATE:", lr)
                 print("")
-            test_or_func(neuron, actv, learning_rate, range, run_number)
-            print("")
+                if fun == 'and' and lr == 0.5:
+                    continue
+                test_func(fun, neuron, actv, lr, range, run_number)
+                print("")
 
         # Activation function experiment
         if neuron == 'perceptron':
