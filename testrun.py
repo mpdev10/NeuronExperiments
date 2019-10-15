@@ -100,8 +100,8 @@ if __name__ == '__main__':
 
         # Activation function experiment
         if neuron == 'perceptron':
+            activations = ['unipolar', 'bipolar']
             print("---ACTIVATION FUNCTION EXPERIMENT---")
-            test_and_func(neuron, actv, learning_rate, range, run_number)
-            print("")
-            test_or_func(neuron, actv, learning_rate, range, run_number)
-            print("")
+            for fun in functions:
+                for activation in activations:
+                    test_func(fun, neuron, activation, learning_rate, range, run_number)
