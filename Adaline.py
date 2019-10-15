@@ -1,5 +1,6 @@
-from Neuron import Neuron
 import numpy as np
+
+from Neuron import Neuron
 
 
 class Adaline(Neuron):
@@ -26,4 +27,3 @@ class Adaline(Neuron):
             loss = np.mean(global_error ** 2)
             if loss <= self.error_th:
                 break
-
