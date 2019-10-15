@@ -92,6 +92,8 @@ if __name__ == '__main__':
                 print("")
                 if fun == 'and' and lr == 0.5:
                     continue
+                if fun == 'or' and lr == 0.5 and neuron == 'adaline':
+                    continue
                 test_func(fun, neuron, actv, lr, range, run_number)
                 print("")
 
