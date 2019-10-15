@@ -67,7 +67,7 @@ if __name__ == '__main__':
     functions = ['and', 'or']
 
     for neuron in ('perceptron', 'adaline'):
-        initial_range = 1.0
+
         learning_rate = 0.1
         range = [-0.2, 0.2]
         print("NEURON:", neuron)
@@ -76,6 +76,7 @@ if __name__ == '__main__':
         # Weight range experiment
         print("---WEIGHT RANGE EXPERIMENT---")
         for fun in functions:
+            initial_range = 1.0
             while initial_range >= 0:
                 current_range = [-initial_range, initial_range]
                 print("RANGE:", current_range)
